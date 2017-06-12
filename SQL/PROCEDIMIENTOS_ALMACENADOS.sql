@@ -1,0 +1,54 @@
+--PROCEDIMEINTOS ALMACENADOS PARA TIPO_ANIMALES!!!
+
+--1.- COJER ID Y DENOMINACON PARA EL GET SOLO
+
+CREATE PROCEDURE GET_ANIMALES
+AS
+BEGIN
+    SELECT idTipoAnimal, denominacion
+    FROM TipoAnimal
+       
+END
+
+--1.1-.COJER ID Y DENOMINACON PARA EL GET SOLO
+
+CREATE PROCEDURE GET_CLASIFICACION
+AS
+BEGIN
+    SELECT idClasificacion, denominacion
+    FROM Clasificacion
+       
+END
+
+--2.- COJER ID Y DENOMINACON PARA USAR EL FILTRADO EN GET (ID)
+
+CREATE PROCEDURE GET_ANIMALES_ID
+
+@idTipoAnimal BIGINT
+AS
+BEGIN
+	SELECT denominacion, idTipoAnimal
+	FROM TipoAnimal
+	WHERE TipoAnimal.idTipoAnimal = @idTipoAnimal
+END
+
+--2.- COJER ID Y DENOMINACON PARA USAR EL FILTRADO EN GET (ID)
+
+
+
+CREATE PROCEDURE GET_CLASIFICACION_ID
+
+@idClasificacion INT
+AS
+BEGIN
+	SELECT denominacion, idClasificacion
+	FROM Clasificacion
+	WHERE Clasificacion.idClasificacion = @idClasificacion
+END
+
+
+
+
+--3.- COJER ID Y DENOMINACION PARA USARLO EN EL POST
+
+
