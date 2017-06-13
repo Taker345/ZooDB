@@ -62,8 +62,29 @@ namespace ZooApi.Controllers
         }
 
         // POST: api/TipoAnimales
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public IHttpActionResult Post([FromBody] TipoAnimal tipoAnimal)
         {
+            RespuestaAPI respuesta = new RespuestaAPI();
+            respuesta.error = "";
+            int filasAfectadas = 0;
+            try
+            {
+                Db.Conectar();
+                if (Db.EstaLaConexionAbierta())
+                {
+                    filasAfectadas = Db.AgregarTipoAnimal(tipoAnimal);
+                }
+                respuesta.totalElementos = filasAfectadas;
+                Db.Desconectar();
+            }
+            catch (Exception ex)
+            {
+                respuesta.totalElementos = 0;
+                respuesta.error = "Error";
+            }
+
+            return Ok(respuesta);
         }
 
         // PUT: api/TipoAnimales/5

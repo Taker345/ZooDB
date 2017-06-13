@@ -7,7 +7,7 @@ namespace ZooApi
 {
     public class Clasificacion
     {
-        public long idClasificacion { get; set; }
+        public int idClasificacion { get; set; }
         public string denominacion { get; set; }
     }
 }

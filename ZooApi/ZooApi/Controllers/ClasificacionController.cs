@@ -39,13 +39,13 @@ namespace ZooApi.Controllers
         public RespuestaAPI Get(int id)
         {
             RespuestaAPI resultado = new RespuestaAPI();
-            List<TipoAnimal> listaTipoAnimal = new List<TipoAnimal>();
+            List<Clasificacion> listaClasificacion = new List<Clasificacion>();
             try
             {
                 Db.Conectar();
                 if (Db.EstaLaConexionAbierta())
                 {
-                    listaTipoAnimal = Db.GET_ANIMALES_ID(id);
+                    listaClasificacion = Db.GET_CLASIFICACION_ID(id);
 
                 }
                 resultado.error = "";
@@ -56,17 +56,37 @@ namespace ZooApi.Controllers
                 resultado.error = "Error";
             }
 
-            resultado.totalElementos = listaTipoAnimal.Count;
-            resultado.dataAnimal = listaTipoAnimal;
+            resultado.totalElementos = listaClasificacion.Count;
+            resultado.dataClasi = listaClasificacion;
             return resultado;
 
         }
 
         // POST: api/Clasificacion
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public IHttpActionResult Post([FromBody] Clasificacion clasificacion)
         {
-        }
+            RespuestaAPI respuesta = new RespuestaAPI();
+            respuesta.error = "";
+            int filasAfectadas = 0;
+            try
+            {
+                Db.Conectar();
+                if (Db.EstaLaConexionAbierta())
+                {
+                    filasAfectadas = Db.AgregarClasificacion(clasificacion);
+                }
+                respuesta.totalElementos = filasAfectadas;
+                Db.Desconectar();
+            }
+            catch (Exception ex)
+            {
+                respuesta.totalElementos = 0;
+                respuesta.error = "Error";
+            }
 
+            return Ok(respuesta);
+        }
         // PUT: api/Clasificacion/5
         public void Put(int id, [FromBody]string value)
         {

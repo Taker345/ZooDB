@@ -11,15 +11,55 @@ namespace ZooApi.Controllers
     public class EspeciesController : ApiController
     {
         // GET: api/Especies
-        public IEnumerable<string> Get()
+        public RespuestaAPI Get()
         {
-            return new string[] { "value1", "value2" };
+            RespuestaAPI resultado = new RespuestaAPI();
+            List<Especies> listaEspecie = new List<Especies>();
+            try
+            {
+                Db.Conectar();
+
+                if (Db.EstaLaConexionAbierta())
+                {
+                    listaEspecie = Db.GET_ESPECIE();
+                }
+                resultado.error = "";
+                Db.Desconectar();
+            }
+            catch(Exception ex)
+            {
+                resultado.error = "Aqui no hay datos ERROR";
+            }
+            resultado.totalElementos = listaEspecie.Count;
+            resultado.data = listaEspecie;
+            return resultado;
         }
 
         // GET: api/Especies/5
-        public string Get(int id)
+        public RespuestaAPI Get(long id)
         {
-            return "value";
+            RespuestaAPI resultado = new RespuestaAPI();
+            List<Especies> listaEspecies = new List<Especies>();
+            try
+            {
+                Db.Conectar();
+                if (Db.EstaLaConexionAbierta())
+                {
+                    listaEspecies = Db.GET_ESPECIES_ID(id);
+
+                }
+                resultado.error = "";
+                Db.Desconectar();
+            }
+            catch
+            {
+                resultado.error = "Error";
+            }
+
+            resultado.totalElementos = listaEspecies.Count;
+            resultado.data = listaEspecies;
+            return resultado;
+
         }
 
         // POST: api/Especies
