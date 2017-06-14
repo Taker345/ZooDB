@@ -143,15 +143,117 @@ namespace ZooApi
 
             return resultado;
         }
-        
-       
+
+        //post para especies (CREAR NUEVO)
+        public static int AgregarEspecie(Especies especie)
+        {
+            string procedimiento = "dbo.AgregarEspecie";
+
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter parametroClasificacion = new SqlParameter();
+            parametroClasificacion.ParameterName = "idClasificacion";
+            parametroClasificacion.SqlDbType = SqlDbType.Int;
+            parametroClasificacion.SqlValue = especie.clasificacion.idClasificacion;
+
+            comando.Parameters.Add(parametroClasificacion);
+
+            SqlParameter parametroTipoAnimal = new SqlParameter();
+            parametroTipoAnimal.ParameterName = "idTipoAnimal";
+            parametroTipoAnimal.SqlDbType = SqlDbType.BigInt;
+            parametroTipoAnimal.SqlValue = especie.tipoAnimal.idTipoAnimal;
+
+            comando.Parameters.Add(parametroTipoAnimal);
+
+            SqlParameter parametroNombre = new SqlParameter();
+            parametroNombre.ParameterName = "nombre";
+            parametroNombre.SqlDbType = SqlDbType.NVarChar;
+            parametroNombre.SqlValue = especie.nombre;
+
+            comando.Parameters.Add(parametroNombre);
+
+            SqlParameter parametroPatas = new SqlParameter();
+            parametroPatas.ParameterName = "nPatas";
+            parametroPatas.SqlDbType = SqlDbType.NVarChar;
+            parametroPatas.SqlValue = especie.nPatas;
+
+            comando.Parameters.Add(parametroPatas);
+
+            SqlParameter parametroEsMascota = new SqlParameter();
+            parametroEsMascota.ParameterName = "esMascota";
+            parametroEsMascota.SqlDbType = SqlDbType.NVarChar;
+            parametroEsMascota.SqlValue = especie.esMascota;
+
+            comando.Parameters.Add(parametroEsMascota);
+
+
+            int filasAfectadas = comando.ExecuteNonQuery();
+            return filasAfectadas;
+        }
+
+        //put para especies (ACTUALIZAR)
+        public static int ActualizarEspecie(long id, Especies especie)
+        {
+            string procedimiento = "dbo.ActualizarEspecie";
+
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter parametroId = new SqlParameter();
+            parametroId.ParameterName = "idEspecie";
+            parametroId.SqlDbType = SqlDbType.BigInt;
+            parametroId.SqlValue = id;
+            comando.Parameters.Add(parametroId);
+
+            SqlParameter parametroClasificacion = new SqlParameter();
+            parametroClasificacion.ParameterName = "idClasificacion";
+            parametroClasificacion.SqlDbType = SqlDbType.Int;
+            parametroClasificacion.SqlValue = especie.clasificacion.idClasificacion;
+
+            comando.Parameters.Add(parametroClasificacion);
+
+            SqlParameter parametroTipoAnimal = new SqlParameter();
+            parametroTipoAnimal.ParameterName = "idTipoAnimal";
+            parametroTipoAnimal.SqlDbType = SqlDbType.BigInt;
+            parametroTipoAnimal.SqlValue = especie.tipoAnimal.idTipoAnimal;
+
+            comando.Parameters.Add(parametroTipoAnimal);
+
+            SqlParameter parametroNombre = new SqlParameter();
+            parametroNombre.ParameterName = "nombre";
+            parametroNombre.SqlDbType = SqlDbType.NVarChar;
+            parametroNombre.SqlValue = especie.nombre;
+
+            comando.Parameters.Add(parametroNombre);
+
+            SqlParameter parametroPatas = new SqlParameter();
+            parametroPatas.ParameterName = "nPatas";
+            parametroPatas.SqlDbType = SqlDbType.NVarChar;
+            parametroPatas.SqlValue = especie.nPatas;
+
+            comando.Parameters.Add(parametroPatas);
+
+            SqlParameter parametroEsMascota = new SqlParameter();
+            parametroEsMascota.ParameterName = "esMascota";
+            parametroEsMascota.SqlDbType = SqlDbType.NVarChar;
+            parametroEsMascota.SqlValue = especie.esMascota;
+
+            comando.Parameters.Add(parametroEsMascota);
+
+            int filasAfectadas = comando.ExecuteNonQuery();
+
+            return filasAfectadas;
+        }
+
+
 
 
         //APARTIR DE AQUI ESTAN TIPO DE ANIMALES
-       
-            
-             
-        
+
+
+
+
         //get_animales completo sin filtro
         public static List<TipoAnimal> GET_ANIMALES()
         {
@@ -312,45 +414,7 @@ namespace ZooApi
         //LA QUE ESTAMOS CREANDO AHORA MISMO!!!! 
 
 
-        public static int AgregarEspecie(Especies especie)
-        {
-            string procedimiento = "dbo.AgregarClasificacion";
 
-            SqlCommand comando = new SqlCommand(procedimiento, conexion);
-            comando.CommandType = CommandType.StoredProcedure;
-
-            SqlParameter parametroClasificacion = new SqlParameter();
-            parametroClasificacion.ParameterName = "idClasificacion";
-            parametroClasificacion.SqlDbType = SqlDbType.Int;
-            parametroClasificacion.SqlValue = especie.clasificacion.idClasificacion;
-
-            comando.Parameters.Add(parametroClasificacion);
-
-            //falta tipoAnimal
-
-            SqlParameter parametroNombre = new SqlParameter();
-            parametroNombre.ParameterName = "nombre";
-            parametroNombre.SqlDbType = SqlDbType.NVarChar;
-            parametroNombre.SqlValue = especie.nombre;
-
-            comando.Parameters.Add(parametroNombre);
-
-
-            //falta nPatas
-
-
-            //falta esMascota
-
-
-
-
-
-
-
-
-            int filasAfectadas = comando.ExecuteNonQuery();
-            return filasAfectadas;
-        }
 
 
 

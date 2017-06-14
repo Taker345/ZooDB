@@ -63,13 +63,54 @@ namespace ZooApi.Controllers
         }
 
         // POST: api/Especies
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public IHttpActionResult Post([FromBody] Especies especie)
         {
+            RespuestaAPI respuesta = new RespuestaAPI();
+            respuesta.error = "";
+            int filasAfectadas = 0;
+            try
+            {
+                Db.Conectar();
+                if (Db.EstaLaConexionAbierta())
+                {
+                    filasAfectadas = Db.AgregarEspecie(especie);
+                }
+                respuesta.totalElementos = filasAfectadas;
+                Db.Desconectar();
+            }
+            catch (Exception ex)
+            {
+                respuesta.totalElementos = 0;
+                respuesta.error = "Error";
+            }
+
+            return Ok(respuesta);
         }
 
         // PUT: api/Especies/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public IHttpActionResult Put(int id, [FromBody]Especies especie)
         {
+            RespuestaAPI respuesta = new RespuestaAPI();
+            respuesta.error = "";
+            int filasAfectadas = 0;
+            try
+            {
+                Db.Conectar();
+                if (Db.EstaLaConexionAbierta())
+                {
+                    filasAfectadas = Db.ActualizarEspecie(id, especie);
+                }
+                respuesta.totalElementos = filasAfectadas;
+                Db.Desconectar();
+            }
+            catch (Exception ex)
+            {
+                respuesta.totalElementos = 0;
+                respuesta.error = "Error al actualizar la marca";
+            }
+            return Ok(respuesta);
         }
 
         // DELETE: api/Especies/5

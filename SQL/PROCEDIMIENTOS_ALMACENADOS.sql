@@ -51,6 +51,38 @@ BEGIN
 	   WHERE ES.idEspecie = @idEspecie
 END
 
+CREATE PROCEDURE AgregarEspecie
+	@idClasificacion INT 
+	,@idTipoAnimal BIGINT
+	,@nombre NVARCHAR (50)
+	,@nPatas SMALLINT
+	,@esMascota BIT
+AS
+BEGIN
+	INSERT INTO Especies 
+	(idClasificacion, idTipoAnimal, nombre, nPatas, esMascota)
+	 VALUES 
+	 (@idClasificacion, @idTipoAnimal, @nombre, @nPatas, @esMascota)
+
+END
+
+CREATE PROCEDURE ActualizarEspecie
+    @idEspecie BIGINT
+	,@idClasificacion INT 
+	,@idTipoAnimal BIGINT
+	,@nombre NVARCHAR (50)
+	,@nPatas SMALLINT
+	,@esMascota BIT
+AS
+BEGIN
+    UPDATE Especies SET
+        idClasificacion = @idClasificacion
+		,idTipoAnimal = @idTipoAnimal
+		,nombre = @nombre
+		,nPatas = @nPatas
+		,esMascota = @esMascota
+    WHERE idEspecie = @idEspecie
+END 
 
 
 
