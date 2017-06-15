@@ -246,7 +246,23 @@ namespace ZooApi
             return filasAfectadas;
         }
 
+        //delete eliminar especie
+        public static int EliminarEspecie(long id)
+        {
+            string procedimiento = "dbo.EliminarEspecie";
 
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+            SqlParameter parametroId = new SqlParameter();
+            parametroId.ParameterName = "idEspecie";
+            parametroId.SqlDbType = SqlDbType.BigInt;
+            parametroId.SqlValue = id;
+
+            comando.Parameters.Add(parametroId);
+            int filasAfectadas = comando.ExecuteNonQuery();
+
+            return filasAfectadas;
+        }
 
 
         //APARTIR DE AQUI ESTAN TIPO DE ANIMALES
@@ -329,9 +345,52 @@ namespace ZooApi
             return filasAfectadas;
         }
 
+        //put para tipoAnimales (ACTUALIZAR)
+        public static int ActualizarTipoAnimal(long id, TipoAnimal tipoAnimal)
+        {
+            string procedimiento = "dbo.ActualizarTipoAnimal";
 
-       
-        
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter parametroId = new SqlParameter();
+            parametroId.ParameterName = "idEspecie";
+            parametroId.SqlDbType = SqlDbType.BigInt;
+            parametroId.SqlValue = id;
+            comando.Parameters.Add(parametroId);
+
+            SqlParameter parametroDenominacion = new SqlParameter();
+            parametroDenominacion.ParameterName = "denominacion";
+            parametroDenominacion.SqlDbType = SqlDbType.NVarChar;
+            parametroDenominacion.SqlValue = tipoAnimal.denominacion;
+
+            comando.Parameters.Add(parametroDenominacion);
+
+            int filasAfectadas = comando.ExecuteNonQuery();
+
+            return filasAfectadas;
+        }
+        //delete eliminar TipoAnimales
+        public static int EliminarTipoAnimal(long id)
+        {
+            string procedimiento = "dbo.EliminarTipoAnimal";
+
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+            SqlParameter parametroId = new SqlParameter();
+            parametroId.ParameterName = "idTipoAnimal";
+            parametroId.SqlDbType = SqlDbType.BigInt;
+            parametroId.SqlValue = id;
+
+            comando.Parameters.Add(parametroId);
+            int filasAfectadas = comando.ExecuteNonQuery();
+
+            return filasAfectadas;
+        }
+
+
+
+
         //APARTIR DE AQUI ESTAN CLASIFICACIONES
 
 
@@ -411,10 +470,52 @@ namespace ZooApi
             return filasAfectadas;
         }
 
+        //put para clasificacion (ACTUALIZAR)
+        public static int ActualizarClasificacion(int id, Clasificacion clasificacion)
+        {
+            string procedimiento = "dbo.ActualizarTipoAnimal";
+
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter parametroId = new SqlParameter();
+            parametroId.ParameterName = "idClasificacion";
+            parametroId.SqlDbType = SqlDbType.BigInt;
+            parametroId.SqlValue = id;
+            comando.Parameters.Add(parametroId);
+
+            SqlParameter parametroDenominacion = new SqlParameter();
+            parametroDenominacion.ParameterName = "denominacion";
+            parametroDenominacion.SqlDbType = SqlDbType.NVarChar;
+            parametroDenominacion.SqlValue = clasificacion.denominacion;
+
+            comando.Parameters.Add(parametroDenominacion);
+
+            int filasAfectadas = comando.ExecuteNonQuery();
+
+            return filasAfectadas;
+        }
+
+        //delete eliminar Clasificacion
+        public static int EliminarClasificacion(long id)
+        {
+            string procedimiento = "dbo.EliminarClasificacion";
+
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+            SqlParameter parametroId = new SqlParameter();
+            parametroId.ParameterName = "idClasificacion";
+            parametroId.SqlDbType = SqlDbType.BigInt;
+            parametroId.SqlValue = id;
+
+            comando.Parameters.Add(parametroId);
+            int filasAfectadas = comando.ExecuteNonQuery();
+
+            return filasAfectadas;
+        }
+
+
         //LA QUE ESTAMOS CREANDO AHORA MISMO!!!! 
-
-
-
 
 
 
