@@ -51,6 +51,8 @@ BEGIN
 	   WHERE ES.idEspecie = @idEspecie
 END
 
+--POST AGREGAR NUEVO 
+
 CREATE PROCEDURE AgregarEspecie
 	@idClasificacion INT 
 	,@idTipoAnimal BIGINT
@@ -65,6 +67,8 @@ BEGIN
 	 (@idClasificacion, @idTipoAnimal, @nombre, @nPatas, @esMascota)
 
 END
+
+--PUT ACTUALIZAR 
 
 CREATE PROCEDURE ActualizarEspecie
     @idEspecie BIGINT
@@ -84,7 +88,15 @@ BEGIN
     WHERE idEspecie = @idEspecie
 END 
 
+-- DELETE ELIMINAR 
 
+
+CREATE PROCEDURE EliminarEspecie
+    @idEspecie bigint
+AS
+BEGIN
+    DELETE FROM Especies WHERE idEspecie = @idEspecie
+END
 
 --o-o-o-o-o-o-o-o-o-o-o-o-o-ANIMALES-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
 
@@ -122,7 +134,21 @@ BEGIN
 	INSERT INTO TipoAnimal(denominacion) VALUES (@denominacion)
 END
 
+--PUT ACTUALIZAR 
+CREATE PROCEDURE ActualizarTipoAnimal
 
+	@idTipoAnimal BIGINT 
+	,@denominacion NVARCHAR(50)
+AS
+BEGIN
+    UPDATE TipoAnimal SET
+
+        denominacion = @denominacion
+
+    WHERE idTipoAnimal = @idTipoAnimal
+END 
+
+-- DELETE ELIMINAR 
 
 
 ---o-o-o-o-o-o-o-o-o-o-o-o-o-CLASIFICACION-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
@@ -162,5 +188,26 @@ BEGIN
 	INSERT INTO Clasificacion(denominacion) VALUES (@denominacion)
 END
 
+--PUT ACTUALIZAR 
 
+CREATE PROCEDURE ActualizarClasificacion
 
+	@idClasificacion INT 
+	,@denominacion NVARCHAR(50)
+AS
+BEGIN
+    UPDATE Clasificacion SET
+
+        denominacion = @denominacion
+
+    WHERE idClasificacion = @idClasificacion
+END 
+
+-- DELETE ELIMINAR 
+
+CREATE PROCEDURE EliminarClasificacion
+    @idClasificacion bigint
+AS
+BEGIN
+    DELETE FROM Clasificacion WHERE idClasificacion = @idClasificacion
+END
