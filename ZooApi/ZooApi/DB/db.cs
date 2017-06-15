@@ -354,7 +354,7 @@ namespace ZooApi
             comando.CommandType = CommandType.StoredProcedure;
 
             SqlParameter parametroId = new SqlParameter();
-            parametroId.ParameterName = "idEspecie";
+            parametroId.ParameterName = "idTipoAnimal";
             parametroId.SqlDbType = SqlDbType.BigInt;
             parametroId.SqlValue = id;
             comando.Parameters.Add(parametroId);
@@ -473,7 +473,7 @@ namespace ZooApi
         //put para clasificacion (ACTUALIZAR)
         public static int ActualizarClasificacion(int id, Clasificacion clasificacion)
         {
-            string procedimiento = "dbo.ActualizarTipoAnimal";
+            string procedimiento = "dbo.ActualizarClasificacion";
 
             SqlCommand comando = new SqlCommand(procedimiento, conexion);
             comando.CommandType = CommandType.StoredProcedure;
