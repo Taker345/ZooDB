@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+        .oculta-loading {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    Relación de marcas <br />
+    <input type="text"
+           id="txtMarcaDenominacion"
+           value=""
+           placeholder="nombre de la nueva marca" />
+    <button id="btnAddMarca">Crear marca</button><br />
+    <img id="imgLoading" class="oculta-loading" src="../imagenes/loading.gif" alt="" />
+    <input type="text"
+           id="txtNuevaMarca"
+           value=""
+           placeholder="valor para actualizar la marca" />
+    <div id="resultados">
+
+    </div>
+
+    <!-- AÑADO LA REFERENCIA PARA PODER USAR JQUERY -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <!-- AÑADO LA REFERENCIA A MIS PROPIOS FICHEROS DE JAVASCRIPT -->
+    <script src="./js/Zoo.js"></script>
+</body>
+</html>
